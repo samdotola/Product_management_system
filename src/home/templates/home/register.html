@@ -1,0 +1,115 @@
+{% load static %}
+
+
+
+{% load static %}
+
+<style type="text/css">
+  /* Center the form and add some spacing */
+  .form-signin {
+    width: 100%;
+    max-width: 330px;
+    margin: 0 auto;
+    padding: 30px;
+  }
+
+  /* Style for form control elements */
+  .form-signin .form-control {
+    position: relative;
+    box-sizing: border-box;
+    height: auto;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc; /* Add a subtle border */
+    border-radius: 5px; /* Rounded corners */
+  }
+
+  /* Highlight on focus */
+  .form-signin .form-control:focus {
+    border-color: #007bff;
+  }
+
+  /* Spacing for email and username inputs */
+  .form-signin input[type="email"],
+  .form-signin input[type="text"] {
+    margin-bottom: 20px;
+  }
+
+  /* Adjust password input spacing */
+  .form-signin input[type="password"] {
+    margin-bottom: 10px;
+  }
+
+  /* Center align the h1 */
+  h1 {
+    text-align: center;
+  }
+
+  /* Style for error messages */
+  .error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+  }
+
+  /* Style for the register button */
+  .btn-register {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 18px;
+    border-radius: 5px;
+  }
+
+  /* Hover effect for the register button */
+  .btn-register:hover {
+    background-color: #0056b3;
+  }
+
+  /* Style for the "Already have an account" link */
+  .account-link {
+    text-align: center;
+    margin-top: 10px;
+  }
+</style>
+
+<form class="form-signin" method="post">{% csrf_token %}
+  <div class="d-flex flex-column pb-3">
+    <img class="img-fluid mx-auto d-block" src="{% static 'logo.jpg' %}" width="72" height="72" alt="Logo">
+  </div>
+  <h1 class="h3 mb-3 font-weight-normal">Register an account</h1>
+
+  <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+
+  <input type="text" name="username" id="inputUsername" class="form-control" placeholder="Organisation" required>
+  
+  <input type="password" name="password1" id="inputPassword1" class="form-control" placeholder="Password" required>
+
+  <input type="password" name="password2" id="inputPassword2" class="form-control" placeholder="Confirm password" required>
+
+  {% for field in registration_form %}
+    {% for error in field.errors %}
+      <p class="error-message">{{ error }}</p>
+    {% endfor %}
+  {% endfor %}
+  {% if registration_form.non_field_errors %}
+    <div class="error-message">
+      <p>{{ registration_form.non_field_errors }}</p>
+    </div>
+  {% endif %}
+  <br>
+
+  <button class="btn btn-lg btn-register btn-block" type="submit">Register</button>
+  <p class="account-link">Already have an account? <a href="{% url 'login' %}">Login</a></p>
+</form>
+
+
+
+
+
+
+
+
+
+

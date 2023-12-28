@@ -1,0 +1,113 @@
+{% load static %}
+
+
+
+
+{% load static %}
+
+<style type="text/css">
+  /* Center the form and add spacing */
+  .form-signin {
+    width: 100%;
+    max-width: 330px;
+    padding: 30px;
+    margin: auto;
+  }
+
+  /* Style for form control elements */
+  .form-signin .form-control {
+    position: relative;
+    box-sizing: border-box;
+    height: auto;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc; /* Add a subtle border */
+    border-radius: 5px; /* Rounded corners */
+  }
+
+  /* Highlight on focus */
+  .form-signin .form-control:focus {
+    border-color: #007bff;
+  }
+
+  /* Adjust spacing for email and password inputs */
+  .form-signin input[type="email"],
+  .form-signin input[type="password"] {
+    margin-bottom: 20px;
+  }
+
+  /* Center-align the h1 */
+  h1 {
+    text-align: center;
+  }
+
+  /* Style for error messages */
+  .error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+  }
+
+  /* Style for the login button */
+  .btn-login {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 18px;
+    border-radius: 5px;
+  }
+
+  /* Hover effect for the login button */
+  .btn-login:hover {
+    background-color: #0056b3;
+  }
+
+  /* Style for the "Don't have an account" link */
+  .account-link {
+    text-align: center;
+    margin-top: 10px;
+  }
+</style>
+
+<form class="form-signin" method="post">{% csrf_token %}
+  <div class="d-flex flex-column pb-3">
+    <img class="img-fluid mx-auto d-block" src="{% static 'logo.jpg' %}" width="72" height="72" alt="Logo">
+  </div>
+  
+  <h1 class="h3 mb-3 font-weight-normal">Login</h1>
+
+  <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+  
+  <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
+
+  {% for field in login_form %}
+    {% for error in field.errors %}
+      <p class="error-message">{{ error }}</p>
+    {% endfor %}
+  {% endfor %}
+  {% if login_form.non_field_errors %}
+    <div class="error-message">
+      <p>{{ login_form.non_field_errors }}</p>
+    </div>
+  {% endif %}
+  <br>
+
+  <button class="btn btn-lg btn-login btn-block" type="submit">Log in</button>
+  <p class="account-link"> <a href="{% url 'register' %}">Create an account</a></p>
+</form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
